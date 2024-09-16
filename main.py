@@ -22,6 +22,7 @@ def play():
         handle_close_btn()
 
         pygame.Surface.fill(screen, "black")
+        player.update(dt)
         player.draw(screen)
         pygame.display.flip()
 
