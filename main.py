@@ -12,9 +12,29 @@ def handle_close_btn():
             sys.exit()
 
 
+def handle_updatable(updatable, dt):
+    for obj in updatable:
+        obj.update(dt)
+
+
+def handle_drawable(drawable, screen):
+    for obj in drawable:
+        obj.draw(screen)
+
+
 def play():
+    # prepare screen for display
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+ 
+    # create sprite groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    # add the player to both groups
+    Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
+    # initialize clock object
     clock = pygame.time.Clock()
     dt = 0
 
@@ -22,8 +42,8 @@ def play():
         handle_close_btn()
 
         pygame.Surface.fill(screen, "black")
-        player.update(dt)
-        player.draw(screen)
+        handle_updatable(updatable, dt)
+        handle_drawable(drawable, screen)
         pygame.display.flip()
 
         dt = clock.tick(60) / 1000
