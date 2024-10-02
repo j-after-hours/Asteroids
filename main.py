@@ -19,6 +19,14 @@ def handle_updatable(updatable, dt):
         obj.update(dt)
 
 
+def handle_collisions(asteroids, player):
+    for asteroid in asteroids:
+        if asteroid.collides_with(player):
+            print("Game over!")
+            pygame.quit()
+            sys.exit()
+
+
 def handle_drawable(drawable, screen):
     for obj in drawable:
         obj.draw(screen)
@@ -53,6 +61,7 @@ def play():
 
         pygame.Surface.fill(screen, "black")
         handle_updatable(updatable, dt)
+        handle_collisions(asteroids, player)
         handle_drawable(drawable, screen)
         pygame.display.flip()
 
