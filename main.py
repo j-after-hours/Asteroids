@@ -4,6 +4,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 
 def handle_close_btn():
@@ -38,8 +39,9 @@ def play():
  
     # create sprite groups
     updatable = pygame.sprite.Group()
-    drawable = pygame.sprite.Group()
+    drawable  = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots     = pygame.sprite.Group()
 
     # add the player to both groups
     Player.containers = (updatable, drawable)
@@ -51,6 +53,9 @@ def play():
     # add the asteroid field to updatable group and create its object
     AsteroidField.containers = (updatable)
     asteroid_field = AsteroidField()
+
+    # add the shots to all required groups
+    Shot.containers = (shots, updatable, drawable)
 
     # initialize clock object
     clock = pygame.time.Clock()
