@@ -29,7 +29,7 @@ def handle_collisions(asteroids, player, shots):
 
         for shot in shots:
             if asteroid.collides_with(shot):
-                asteroid.kill()
+                asteroid.split()
                 shot.kill()
 
 
